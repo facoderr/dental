@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
 	// Slider Event
 
 	$('.about-sliderFor').slick({
@@ -22,7 +21,15 @@ $(document).ready(function() {
 		slidesToScroll: 1,
 		focusOnSelect: true,
 		speed: 500,
-		asNavFor: '.about-sliderFor'
+		asNavFor: '.about-sliderFor',
+		responsive: [
+			{
+				breakpoint: 575,
+				settings: {
+					slidesToShow: 3
+				}
+			}
+		]
 	});
 	$('.certificate-slider').slick({
 		prevArrow: '<button type="button" class="slick-prev"></button>',
@@ -38,19 +45,7 @@ $(document).ready(function() {
 			{
 				breakpoint: 1199,
 				settings: {
-					slidesToShow: 5
-				}
-			},
-			{
-				breakpoint: 768,
-				settings: {
 					slidesToShow: 4
-				}
-			},
-			{
-				breakpoint: 575,
-				settings: {
-					slidesToShow: 3
 				}
 			}
 		]
@@ -72,7 +67,7 @@ $(document).ready(function() {
 				}
 			},
 			{
-				breakpoint: 575,
+				breakpoint: 768,
 				settings: {
 					slidesToShow: 1
 				}
@@ -88,15 +83,21 @@ $(document).ready(function() {
 		speed: 500,
 		responsive: [
 			{
-				breakpoint: 992,
+				breakpoint: 1199,
 				settings: {
 					slidesToShow: 3
 				}
 			},
 			{
-				breakpoint: 768,
+				breakpoint: 991,
 				settings: {
 					slidesToShow: 2
+				}
+			},
+			{
+				breakpoint: 575,
+				settings: {
+					slidesToShow: 1
 				}
 			}
 		]
@@ -127,8 +128,9 @@ $(document).ready(function() {
 		speed: 500,
 		responsive: [
 			{
-				breakpoint: 1199,
+				breakpoint: 992,
 				settings: {
+					adaptiveHeight: true,
 					slidesToShow: 1
 				}
 			}
@@ -137,8 +139,72 @@ $(document).ready(function() {
 
 	//
 
+	// Gallery Event
+
+	$('.js-play').magnificPopup({
+		type: 'iframe',
+		mainClass: 'mfp-with-zoom',
+		zoom: {
+			enabled: true,
+			duration: 300
+		}
+	});
+	$('.certificate-slider').each(function() {
+		$(this).magnificPopup({
+			delegate: '.slide:not(.slick-cloned) a',
+			type: 'image',
+			closeOnContentClick: false,
+			closeBtnInside: false,
+			mainClass: 'mfp-with-zoom mfp-img-mobile',
+			image: {
+				verticalFit: true
+			},
+			gallery: {
+				enabled: true
+			},
+			zoom: {
+				enabled: true,
+				duration: 300,
+				opener: function(element) {
+					return element.find('img');
+				}
+			}
+		});
+	});
+	$('.works-slider').each(function() {
+		$(this).magnificPopup({
+			delegate: '.slide:not(.slick-cloned) a',
+			type: 'image',
+			closeOnContentClick: false,
+			closeBtnInside: false,
+			mainClass: 'mfp-with-zoom mfp-img-mobile',
+			image: {
+				verticalFit: true
+			},
+			gallery: {
+				enabled: true
+			},
+			zoom: {
+				enabled: true,
+				duration: 300,
+				opener: function(element) {
+					return element.find('img');
+				}
+			}
+		});
+	});
+
+	//
+
 	// Click Event
 
+	$(document).on('click', '.js-article', function() {
+		var title = $(this).find('.information-box-title').text();
+				text = $(this).find('.information-box-text').text();
+		$('.popup-info-title').html(title);
+		$('.popup-info-text').html(text);
+		$('.popup-article').addClass('open');
+	});
 	$(document).on('click', '.js-order', function() {
 		$('.popup-form-title').html('Заказать звонок');
 		$('.popup .btn').html('Отправить');
@@ -158,7 +224,7 @@ $(document).ready(function() {
 		$('.popup').removeClass('open');
 	});
 	$(document).bind('mouseup touchend', function(e) {
-		if ($(e.target).closest('.popup-form').length || $(e.target).closest('.popup-block').length || $(e.target).closest('.js-required').length) return;
+		if ($(e.target).closest('.popup-info').length || $(e.target).closest('.popup-form').length || $(e.target).closest('.popup-block').length || $(e.target).closest('.js-required').length) return;
 		$('.popup').removeClass('open');
 		$('.input').removeClass('error');
 	});
@@ -223,13 +289,6 @@ $(document).ready(function() {
 
 	// Scroll Event
 
-	$(window).bind('scroll', function() {
-		$('.animated').each(function(){
-			if ($(document).scrollTop() >= $(this).offset().top - 600) {
-				$(this).removeClass('animated');
-			}
-		});
-	});
 	$(document).on('click', '.js-anchor', function() {
 		var id = $(this).attr('href');
 				scroll = $(id).offset().top;
