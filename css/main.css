@@ -1402,7 +1402,7 @@ h2 {
 
 .popup-info {
   position: relative;
-  width: 600px;
+  width: 700px;
   background: #fff;
   -webkit-box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.16);
           box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.16);
@@ -1417,14 +1417,14 @@ h2 {
 }
 
 .popup-info-title {
-  font-size: 25px;
+  font-size: 21px;
   font-weight: 600;
   line-height: 1.2;
-  margin: 0 0 25px;
+  margin: 0 0 20px;
 }
 
 .popup-info-text {
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
